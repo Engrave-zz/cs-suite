@@ -108,8 +108,8 @@ def scout2():
     print ("Started Scout2")
     file_name = 'scout2_report'
     subprocess.call(['python', 'Scout2.py', '--no-browser', '--report-dir',\
-                     '../../reports/AWS/aws_audit/%s/%s/%s' \
-                     %(account_name, timestmp, file_name)], cwd='tools/Scout2')
+                     '../../reports/AWS/aws_audit/%s' \
+                     %(file_name)], cwd='tools/Scout2')
     print ("Scout2 Audit done")
     return 0
 
@@ -128,22 +128,22 @@ def csv_to_json(file):
 def audit_aws_certs():
     """  this function audits AWS certs """
     print ("Started AWS cert audit")
-    with open('reports/AWS/aws_audit/%s/%s/delta/certs' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/certs', 'w') as output:
         subprocess.call(['python', './scripts/audit_aws_certs.py'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/certs' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/certs').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,CERT_AUDIT,No information is available\n")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/certs' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/certs')
     print ("Cert Audit Done")
     return 0
 
 def audit_aws_cf():
     """ this function is to audit Cloud Formation """
     print ("Started Cloud Formation Audit ")
-    with open('reports/AWS/aws_audit/%s/%s/delta/cloud_formation' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/cloud_formation', 'w') as output:
         subprocess.call(['./scripts/audit_aws_cloud_formation.sh'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/cloud_formation' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/cloud_formation').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,CLOUD_FORMATION_AUDIT,No information is available")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/cloud_formation' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/cloud_formation')
     print ("Cloud Formation Audit Done")
     return 0
 
@@ -151,11 +151,11 @@ def audit_aws_cf():
 def audit_aws_config():
     """ this function is to audit AWS config """
     print ("Started AWS config Audit ")
-    with open('reports/AWS/aws_audit/%s/%s/delta/aws_config' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/aws_config', 'w') as output:
         subprocess.call(['./scripts/audit_aws_config.sh'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/aws_config' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/aws_config').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,CONFIG_AUDIT,No information is available")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/aws_config' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/aws_config')
     print ("AWS config Audit Done")
     return 0
 
@@ -163,11 +163,11 @@ def audit_aws_config():
 def audit_aws_dns():
     """ this function is to DNS """
     print ("Started AWS DNS Audit ")
-    with open('reports/AWS/aws_audit/%s/%s/delta/dns' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/dns', 'w') as output:
         subprocess.call(['./scripts/audit_aws_dns.sh'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/dns' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/dns').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,DNS_AUDIT,No information is available")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/dns' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/dns')
     print ("AWS DNS Audit Done")
     return 0
 
@@ -175,11 +175,11 @@ def audit_aws_dns():
 def audit_aws_ec():
     """ this function is to audit Elastic Cache """
     print ("Started AWS Elastic Cache Audit ")
-    with open('reports/AWS/aws_audit/%s/%s/delta/ec' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/ec', 'w') as output:
         subprocess.call(['./scripts/audit_aws_ec.sh'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/ec' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/ec').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,ELASTIC_CACHE_AUDIT,No information is available")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/ec' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/ec')
     print ("AWS Elastic Cache Audit Done ")
     return 0
 
@@ -187,11 +187,11 @@ def audit_aws_ec():
 def audit_aws_ec2():
     """ this function is to audit Instances """
     print ("Started AWS Instances Audit ")
-    with open('reports/AWS/aws_audit/%s/%s/delta/ec2' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/ec2', 'w') as output:
         subprocess.call(['./scripts/audit_aws_ec2.sh'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/ec2' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/ec2').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,EC2_AUDIT,No information is available")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/ec2' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/ec2')
     print ("AWS Instances Audit Done ")
     return 0
 
@@ -199,11 +199,11 @@ def audit_aws_ec2():
 def audit_aws_elb():
     """ this function is to audit Instances """
     print ("Started AWS Load-Balancer Audit ")
-    with open('reports/AWS/aws_audit/%s/%s/delta/elb' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/elb', 'w') as output:
         subprocess.call(['./scripts/audit_aws_elb.sh'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/elb' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/elb').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,ELB_AUDIT,No information is available")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/elb' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/elb')
     print ("AWS Load-Balancer Audit Done ")
     return 0
 
@@ -211,11 +211,11 @@ def audit_aws_elb():
 def audit_aws_es():
     """ this function is to audit Instances """
     print ("Started AWS Elastic-Search Audit ")
-    with open('reports/AWS/aws_audit/%s/%s/delta/es' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/es', 'w') as output:
         subprocess.call(['./scripts/audit_aws_es.sh'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/es' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/es').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,ELASTIC_SEARCH_AUDIT,No information is available")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/es' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/es')
     print ("AWS Elastic-Search Audit Done ")
     return 0
 
@@ -223,11 +223,11 @@ def audit_aws_es():
 def audit_aws_keys():
     """ this function is to audit Instances """
     print ("Started AWS SSH Audit ")
-    with open('reports/AWS/aws_audit/%s/%s/delta/keys' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/keys', 'w') as output:
         subprocess.call(['./scripts/audit_aws_keys.sh'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/keys' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/keys').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,AWS_KEY_AUDIT,No information is available")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/keys' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/keys')
     print ("AWS SSH Audit Done ")
     return 0
 
@@ -235,23 +235,23 @@ def audit_aws_keys():
 def audit_aws_rds():
     """ this function is to audit Instances """
     print ("Started AWS RDS Audit ")
-    with open('reports/AWS/aws_audit/%s/%s/delta/rds' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/rds', 'w') as output:
         subprocess.call(['./scripts/audit_aws_rds.sh'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/rds' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/rds').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,RDS_AUDIT,No information is available")
     print ("AWS RDS Audit Done ")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/rds' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/rds')
     return 0
 
 
 def audit_aws_redshift():
     """ this function is to audit Instances """
     print ("Started AWS Redshift Audit ")
-    with open('reports/AWS/aws_audit/%s/%s/delta/redshift' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/redshift', 'w') as output:
         subprocess.call(['./scripts/audit_aws_redshift.sh'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/redshift' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/redshift').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,REDSHIFT_AUDIT,No information is available")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/redshift' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/redshift')
     print ("AWS Redshift Audit Done ")
     return 0
 
@@ -259,11 +259,11 @@ def audit_aws_redshift():
 def audit_aws_ses():
     """ this function is to audit Instances """
     print ("Started AWS SES Audit ")
-    with open('reports/AWS/aws_audit/%s/%s/delta/ses' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/ses', 'w') as output:
         subprocess.call(['./scripts/audit_aws_ses.sh'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/ses' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/ses').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,SES_AUDIT,No information is available")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/ses' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/ses')
     print ("AWS SES Audit Done ")
     return 0
 
@@ -271,11 +271,11 @@ def audit_aws_ses():
 def audit_aws_cdn():
     """ this function is to audit Instances """
     print ("Started AWS CDN Audit ")
-    with open('reports/AWS/aws_audit/%s/%s/delta/cdn' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/cdn', 'w') as output:
         subprocess.call(['./scripts/aws_cdn_audit.sh'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/cdn' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/cdn').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,CDN_AUDIT,No information is available")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/cdn' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/cdn')
     print ("AWS CDN Audit Done ")
     return 0
 
@@ -283,11 +283,11 @@ def audit_aws_cdn():
 def audit_aws_sns():
     """ this function is to audit Instances """
     print ("Started AWS SNS Audit ")
-    with open('reports/AWS/aws_audit/%s/%s/delta/sns' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/sns', 'w') as output:
         subprocess.call(['./scripts/audit_aws_sns.sh'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/sns' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/sns').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,SNS_AUDIT,No information is available")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/sns' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/sns')
     print ("AWS SNS Audit Done ")
     return 0
 
@@ -295,16 +295,16 @@ def audit_aws_sns():
 def audit_aws_vpcs():
     """ this function is to audit Instances """
     print ("Started AWS VPC Audit ")
-    with open('reports/AWS/aws_audit/%s/%s/delta/vpc' % (account_name, timestmp), 'w') as output:
+    with open('reports/AWS/aws_audit/delta/vpc', 'w') as output:
         subprocess.call(['./scripts/audit_aws_vpcs.sh'], stdout=output)
-        if os.stat('reports/AWS/aws_audit/%s/%s/delta/vpc' %(account_name, timestmp)).st_size == 0:
+        if os.stat('reports/AWS/aws_audit/delta/vpc').st_size == 0:
             output.write("default,account,null,null,INFO,scored,null,VPC_AUDIT,No information is available")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/delta/vpc' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/delta/vpc')
     print ("AWS VPC Audit Done ")
     return 0
 
 def trusted_advisor():
-    with open('reports/AWS/aws_audit/%s/%s/final_report/trusted' %(account_name, timestmp), 'w') as f:
+    with open('reports/AWS/aws_audit/final_report/trusted', 'w') as f:
         account_id = subprocess.check_output(['aws sts get-caller-identity --output text --query "Account"'], shell=True).strip()
         try:
             client = boto3.client('support', region_name='us-east-1')
@@ -336,13 +336,13 @@ def trusted_advisor():
                            checks[check], response['result']['status']))
         except Exception:
             print ("Keys don't have read-only support permission")
-    csv_to_json('reports/AWS/aws_audit/%s/%s/final_report/trusted' % (account_name, timestmp))
+    csv_to_json('reports/AWS/aws_audit/final_report/trusted')
 
 
 def aws_audit():
     """ This function used for calling all the AWS audit functions"""
-    subprocess.call(['mkdir', '-p', 'reports/AWS/aws_audit/%s/%s/final_report' % (account_name, timestmp)])
-    subprocess.call(['mkdir', '-p', 'reports/AWS/aws_audit/%s/%s/delta' % (account_name, timestmp)])
+    subprocess.call(['mkdir', '-p', 'reports/AWS/aws_audit/final_report'])
+    subprocess.call(['mkdir', '-p', 'reports/AWS/aws_audit/delta'])
     p1 = Process(target=multi_threaded_prowler)
     p1.start()
     p2 = Process(target=scout2)
