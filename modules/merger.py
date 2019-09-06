@@ -285,7 +285,7 @@ def persistent_files():
         with open('./reports/AWS/aws_audit/delta/diff.html', 'w') as f:
             f.write("This is the first audit for the account, diff will be shown in the next run")
     else:
-        last_dir = subprocess.check_output(["ls -td -- */ | head -n 2 | cut -d'/' -f1 | sed -n 2p"], cwd='./reports/AWS/aws_audit/%s' %(account_name), shell=True).strip()
+        last_dir = subprocess.check_output(["ls -td -- */ | head -n 2 | cut -d'/' -f1 | sed -n 2p"], cwd='./reports/AWS/aws_audit/', shell=True).strip()
         latest = "./reports/AWS/aws_audit/final_report/final_json"
         last = "./reports/AWS/aws_audit/final_report/final_json"
         persistent(latest, last)
